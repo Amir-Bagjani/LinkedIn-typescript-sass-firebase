@@ -25,10 +25,28 @@ a{
     color: unset;
 }
 
+
+
 //utilities
+.btn{
+    @include btn;
+}
+
+.wrapper{
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
 
 
 //media queries
+@media (max-width: 1128px){
+    .wrapper{
+        padding-right: 0.7rem;
+        padding-left: 0.7rem;
+    }
+}
+
 @media (max-width: 768px){
     html{
         font-size: 62.5%;
