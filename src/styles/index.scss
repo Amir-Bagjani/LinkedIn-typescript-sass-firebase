@@ -3,7 +3,6 @@
 *{
     margin: 0; padding: 0;
     box-sizing: border-box;
-    text-decoration: none;
     border: none; outline: none;
     list-style-type: none;
     background: transparent;
@@ -21,11 +20,17 @@ body{
 button{
     cursor: pointer;
 }
+a{
+    text-decoration: none;
+    color: unset;
+}
 
 //utilities
+
 
 //media queries
 @media (max-width: 768px){
     html{
+        font-size: 62.5%;
     }
 }
