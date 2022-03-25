@@ -28,9 +28,9 @@ a{
 
 
 //utilities
-.btn{
-    @include btn;
-}
+// .btn{
+//     @include btn;
+// }
 
 .wrapper{
     max-width: $max-width;
@@ -40,12 +40,12 @@ a{
 
 
 //media queries
-@media (max-width: 1128px){
-    .wrapper{
-        padding-right: 0.7rem;
-        padding-left: 0.7rem;
-    }
-}
+// @media (max-width: 1128px){
+//     .wrapper{
+//         padding-right: 0.7rem;
+//         padding-left: 0.7rem;
+//     }
+// }
 
 @media (max-width: 768px){
     html{

@@ -1,0 +1,135 @@
+@import "config";
+
+%d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.header{
+    background-color: #fff;
+    position: fixed;
+    z-index: 999;
+    left: 0;top: 0;right: 0;
+
+    .wrapper{
+        padding: 0.5rem;
+        @extend %d-flex;
+
+        .search{
+            @extend %d-flex;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            margin-right: auto;
+            padding: 0.6rem 0 0.6rem 1rem;
+            background-color: #EEF3F8;
+            color: $gray-color;
+            border-radius: 0.5rem;
+        }
+
+        nav{
+            background-color: #fff;
+            ul{
+                background-color: #fff;
+                @extend %d-flex;
+                gap: 1.5rem;
+
+                li.active a{
+                    color: black;
+                }
+                
+                li{
+                    a{
+                        @extend %d-flex;
+                        flex-direction: column;
+                        font-size: 1rem;
+                        color: $gray-color;
+                        cursor: pointer;
+                        i{
+                            font-size: 1.5rem;
+                        }
+                        &:hover{
+                            color: black;
+                        }
+                    } 
+                }  
+
+                li.user{
+                    position: relative;
+                    @extend %d-flex;
+                    flex-direction: column;
+
+                    &:hover p{
+                        display: block;
+                    }
+
+                    span{
+                        @extend %d-flex;
+                        gap: 0.3rem;
+                        color: $gray-color;
+                        &:hover{
+                            color: black;
+                            cursor: pointer;
+                        }
+                    }   
+                    
+                    p{
+                        position: absolute;
+                        top: 100%;
+                        left: -2rem;
+                        background-color: #fff;
+                        padding: 0.7rem 1rem;
+                        border: 1px solid lightgray;
+                        border-radius: 0.5rem;
+                        width: max-content;
+                        cursor: pointer;
+                        display: none;
+                    }
+                }
+
+                li.work{
+                    border-left: 1px solid rgba(0,0,0,0.4);
+                    padding-left: 0.5rem;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        gap: 0.3rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1128px){
+    .header{
+        .wrapper{
+            padding: 0.5rem 1rem;
+        }
+    }
+}
+@media (max-width: 768px){
+    .header .wrapper{
+        nav{
+            position: fixed;
+            left: 0;right: 0;bottom: 0;
+            z-index: 999;
+
+            ul{
+                justify-content: space-evenly;
+                gap: 0;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+
+                li.work{
+                    padding-left: 0;
+                    border-left: none;
+                }
+
+                li.user p{
+                    top: -60%;
+                }
+            }
+        }
+    }
+}
