@@ -154,8 +154,6 @@
                 margin: 1rem 0;
                 img{
                     width: 100%;
-                    height: 17rem;
-                    object-fit: cover;
                     cursor: pointer;
                 }
 
@@ -173,6 +171,14 @@
 
             .left{
                 position: initial;
+            }
+            
+            .right{
+                position: initial;
+
+                .banner-card{
+                    margin-bottom: 5.5rem;
+                }
             }
         }
     }
