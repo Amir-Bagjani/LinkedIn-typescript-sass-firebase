@@ -1,11 +1,21 @@
-type AvatarProps = {src: string, width: number, borderColor?: string}
+type AvatarProps = { src: string; width: number; borderColor?: string };
 
-const Avatar: React.FC<AvatarProps> = ({src, width}) => {
+const Avatar: React.FC<AvatarProps> = ({ src, width }) => {
   return (
     <div>
-        <img src={src} alt="user-avatar" style={{borderRadius: `50%`, width: width, height: width, objectFit: `cover`}} />
+      <img
+        src={src}
+        alt="user-avatar"
+        style={{
+          borderRadius: `50%`,
+          width: width,
+          height: width,
+          objectFit: `cover`,
+          border: `1px solid #fff`
+        }}
+      />
     </div>
-  )
-}
+  );
+};
 
 export default Avatar;

@@ -57,11 +57,7 @@
                     position: relative;
                     @extend %d-flex;
                     flex-direction: column;
-
-                    &:hover p{
-                        display: block;
-                    }
-
+                    
                     span{
                         @extend %d-flex;
                         gap: 0.3rem;
@@ -83,6 +79,10 @@
                         width: max-content;
                         cursor: pointer;
                         display: none;
+                    }
+
+                    &:hover p{
+                        display: block;
                     }
                 }
 
