@@ -1,6 +1,12 @@
-import Avatar from "./Avatar"
+import { useSelector } from "react-redux";
+import { UserSelect } from "../redux/store";
+
+import Avatar from "./Avatar";
+
 
 const LeftSide = () => {
+
+  const { user } = useSelector(UserSelect);
 
   const widget = (content: string, number: number) => (
     <div>
@@ -13,8 +19,8 @@ const LeftSide = () => {
         <img className="img-bg" src="images/card-bg.svg" alt="card-background" />
 
         <div className="user-info">
-            <Avatar src="images/photo.svg" width={90} />
-            <h3>Amir Bagjani</h3>
+            <Avatar src={user?.photoURL ? user.photoURL : "images/photo.svg"} width={90} />
+            <h3>{user?.displayName}</h3>
             <p>ReactJS developer</p>
         </div>
 
