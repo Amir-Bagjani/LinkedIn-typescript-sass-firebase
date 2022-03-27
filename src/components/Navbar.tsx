@@ -1,12 +1,18 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { UserSelect } from "../redux/store";
 import { useLogout } from "../hooks/useLogout";
+
 import Avatar from "./Avatar";
 
 import "../styles/navbar.scss";
 
+
+
 const Navbar = () => {
 
   const { error, logout } = useLogout();
+  const { user } = useSelector(UserSelect);
 
   useEffect(() => {
     if(error) alert(error)
@@ -41,7 +47,7 @@ const Navbar = () => {
                         <a><i className="fas fa-bell"></i> Notification</a>
                     </li>
                     <li className='user'>
-                        <Avatar src="images/user.svg" width={25} /> 
+                        <Avatar src={user?.photoURL ? user.photoURL : "images/user.svg"} width={25} /> 
                         <span>Me <i className="fas fa-caret-down"></i></span>
                         <p onClick={logout}>Sign Out</p>
                     </li>

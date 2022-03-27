@@ -7,7 +7,7 @@ export const store =  configureStore({
         user: userReducer,
     },
     //Getting an error "A non-serializable value was detected in the state" when using redux toolkit - but NOT with normal redux
-    //With the getDefaultMiddleware getting depreciated, this can be resolved by using following code
+    //With the getDefaultMiddleware getting depreciated, this can be resolved by use following code
     middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
