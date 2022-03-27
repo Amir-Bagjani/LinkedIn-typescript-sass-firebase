@@ -11,7 +11,8 @@ const Avatar: React.FC<AvatarProps> = ({ src, width }) => {
           width: width,
           height: width,
           objectFit: `cover`,
-          border: `1px solid #fff`
+          border: `1px solid #fff`,
+          cursor: `pointer`
         }}
       />
     </div>

@@ -17,7 +17,7 @@ html{
 body{
     background-color: $bg-body;
 }
-button{
+button, i, img{
     cursor: pointer;
 }
 a{
@@ -28,27 +28,35 @@ a{
 
 
 //utilities
-// .btn{
-//     @include btn;
-// }
-
 .wrapper{
     max-width: $max-width;
     margin: 0 auto;
 }
 
+.btn{
+    @include btn;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    i{
+        font-size: 1.5rem;
+    }
+}
 
 
 //media queries
-// @media (max-width: 1128px){
-//     .wrapper{
-//         padding-right: 0.7rem;
-//         padding-left: 0.7rem;
-//     }
-// }
-
 @media (max-width: 768px){
     html{
-        font-size: 62.5%;
+        font-size: 75%;
+    }
+}
+
+@media (max-width: 450px){
+    .btn{
+        gap: 0.5rem;
+        i{
+            font-size: 1rem;
+        }
     }
 }
