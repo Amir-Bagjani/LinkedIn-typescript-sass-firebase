@@ -1,7 +1,18 @@
+import { useEffect } from "react";
+import { useLogin } from "../hooks/useLogin";
+
 import "../styles/login.scss";
 
 
 const Login = () => {
+
+  const { login, error } = useLogin();
+
+  useEffect(() => {
+    if(error) alert(error)
+  }, [error])
+  
+
   return (
     <div className="login-page">
         <div className="wrapper">
@@ -18,7 +29,7 @@ const Login = () => {
             <section>
                 <div className="hero">
                     <h1>Welcome to your professional community</h1>
-                    <button>
+                    <button onClick={() => login()}>
                         <img src="images/google.svg" alt="google-image" />
                         Sign in with google
                     </button>
