@@ -18,7 +18,6 @@ export const useLogin = () => {
         try{
             const res = await auth.signInWithPopup(authGoogle);
             dispatch(loginUser(res.user))
-            console.log(res.user);
             
             if(!isCancelled){
                 setIsPending(false);

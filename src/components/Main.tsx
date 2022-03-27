@@ -1,10 +1,16 @@
-import { useState } from "react"
-import Avatar from "./Avatar"
-import PostModal from "./PostModal"
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { UserSelect } from "../redux/store";
+
+import Avatar from "./Avatar";
+import PostModal from "./PostModal";
+
+
 
 const Main = () => {
 
   const [openModal,setOpenModal] = useState(false);
+  const { user } = useSelector(UserSelect);
 
   const closeModal = () => {
     setOpenModal(false);
@@ -21,7 +27,7 @@ const Main = () => {
 
       <div className="share-box">
         <div className="user-button">
-          <Avatar src="images/user.svg" width={55} />
+          <Avatar src={user?.photoURL ? user.photoURL : "images/user.svg"} width={45} />
           <button onClick={() => setOpenModal(true)}>Start a post</button>
         </div>
         <div className="buttons">
@@ -36,7 +42,7 @@ const Main = () => {
 
         <div className="actor">
           <i className="fas fa-ellipsis-h"></i>
-          <Avatar src="images/user.svg" width={55} />
+          <Avatar src={user?.photoURL ? user.photoURL : "images/user.svg"} width={45} />
           <div>
             <p>title</p>
             <p>description</p>

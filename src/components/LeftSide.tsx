@@ -19,7 +19,7 @@ const LeftSide = () => {
         <img className="img-bg" src="images/card-bg.svg" alt="card-background" />
 
         <div className="user-info">
-            <Avatar src={user?.photoURL ? user.photoURL : "images/photo.svg"} width={90} />
+            <Avatar src={user?.photoURL ? user.photoURL : "images/photo.svg"} width={70} />
             <h3>{user?.displayName}</h3>
             <p>ReactJS developer</p>
         </div>

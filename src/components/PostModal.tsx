@@ -4,6 +4,8 @@ import ReactPlayer from "react-player";
 import Avatar from "./Avatar";
 
 import "../styles/postModal.scss";
+import { UserSelect } from "../redux/store";
+import { useSelector } from "react-redux";
 
 type ModalProps = {
     openModal: boolean;
@@ -16,7 +18,9 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     const [shareImg,setShareImg] = useState<File | null>(null);
     const [shareVideo,setShareVideo] = useState("");
     const [area,setArea] = useState("");
-    const imgRef = useRef({} as HTMLInputElement)
+    const imgRef = useRef({} as HTMLInputElement);
+
+    const { user } = useSelector(UserSelect);
 
     const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShareImg(null);
@@ -57,8 +61,6 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         resetModal();
     }
 
-   
-
   return (
     <>{openModal && 
         <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  resetModal()}>
@@ -71,8 +73,8 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
 
                 <div className="modal-content">
                     <div className="modal-content-user">
-                        <Avatar src="images/user.svg" width={55} /> 
-                        <span>Amir Bagjani</span>
+                        <Avatar src={user?.photoURL ? user.photoURL : "images/user.svg"} width={45} /> 
+                        <span>{user?.displayName}</span>
                     </div>
 
                     <div className="modal-content-editor">
