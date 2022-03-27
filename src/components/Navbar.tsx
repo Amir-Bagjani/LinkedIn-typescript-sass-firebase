@@ -1,8 +1,17 @@
-import "../styles/navbar.scss";
-
+import { useEffect } from "react";
+import { useLogout } from "../hooks/useLogout";
 import Avatar from "./Avatar";
 
+import "../styles/navbar.scss";
+
 const Navbar = () => {
+
+  const { error, logout } = useLogout();
+
+  useEffect(() => {
+    if(error) alert(error)
+  }, [error])
+
   return (
     <header className="header">
         <div className="wrapper">
@@ -34,7 +43,7 @@ const Navbar = () => {
                     <li className='user'>
                         <Avatar src="images/user.svg" width={25} /> 
                         <span>Me <i className="fas fa-caret-down"></i></span>
-                        <p>Sign Out</p>
+                        <p onClick={logout}>Sign Out</p>
                     </li>
                     <li className='work'>
                         <a>

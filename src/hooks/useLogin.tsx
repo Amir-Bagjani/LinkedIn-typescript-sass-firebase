@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { auth, authGoogle } from "../firebase/firebaseConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { authIsReady, loginUser } from "../redux/userSlice";
-import { UserSelect } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/userSlice";
 
 
 export const useLogin = () => {
@@ -11,10 +10,7 @@ export const useLogin = () => {
     const[error, setError] = useState<string | null>(null);
     const[isCancelled, setIsCancelled] = useState(false);
 
-    // const user = firebase.auth().currentUser;
-
     const dispatch = useDispatch();
-    const { user: uu } = useSelector(UserSelect);
 
     const login = async() => {
         setIsPending(true);
@@ -38,9 +34,6 @@ export const useLogin = () => {
 
 
     useEffect(() => {
-        // auth.onAuthStateChanged(uu => {
-        //     dispatch(authIsReady(uu))
-        // })
         return () => setIsCancelled(true)
     }, [])
 

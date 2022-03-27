@@ -29,7 +29,7 @@ const Login = () => {
             <section>
                 <div className="hero">
                     <h1>Welcome to your professional community</h1>
-                    <button onClick={() => login()}>
+                    <button onClick={login}>
                         <img src="images/google.svg" alt="google-image" />
                         Sign in with google
                     </button>
