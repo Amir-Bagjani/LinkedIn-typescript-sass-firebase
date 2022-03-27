@@ -57,9 +57,11 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         handleCloseModal();
     }
 
+   
+
   return (
     <>{openModal && 
-        <div className="parent-modal">
+        <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  handleCloseModal()}>
             <div className="modal">
 
                 <div className="modal-header">
