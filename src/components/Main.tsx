@@ -1,6 +1,14 @@
+import { useState } from "react"
 import Avatar from "./Avatar"
+import PostModal from "./PostModal"
 
 const Main = () => {
+
+  const [openModal,setOpenModal] = useState(false);
+
+  const closeModal = () => {
+    setOpenModal(false);
+  }
 
   const button = (icon: string, text: string) => (
     <button className="btn">
@@ -14,7 +22,7 @@ const Main = () => {
       <div className="share-box">
         <div className="user-button">
           <Avatar src="images/user.svg" width={55} />
-          <button>Start a post</button>
+          <button onClick={() => setOpenModal(true)}>Start a post</button>
         </div>
         <div className="buttons">
           {button("fas fa-image", "Photo")}
@@ -63,6 +71,8 @@ const Main = () => {
         </div>
 
       </div>
+
+      <PostModal openModal={openModal} closeModal={closeModal}  />
 
     </div>
   )
