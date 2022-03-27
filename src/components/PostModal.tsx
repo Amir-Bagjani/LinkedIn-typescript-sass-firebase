@@ -18,7 +18,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     const [area,setArea] = useState("");
     const imgRef = useRef({} as HTMLInputElement)
 
-    const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShareImg(null);
         const image= e.target.files?.[0];
 
@@ -46,7 +46,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         }
     }
 
-    const handleCloseModal = () => {
+    const resetModal = () => {
         setShareText("");
         setShareImg(null);
         setShareVideo("");
@@ -54,19 +54,19 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     }
 
     const handleSubmit = () => { 
-        handleCloseModal();
+        resetModal();
     }
 
    
 
   return (
     <>{openModal && 
-        <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  handleCloseModal()}>
+        <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  resetModal()}>
             <div className="modal">
 
                 <div className="modal-header">
                     <h2>Create a post</h2>
-                    <i className="fas fa-times" onClick={handleCloseModal}></i>
+                    <i className="fas fa-times" onClick={resetModal}></i>
                 </div>
 
                 <div className="modal-content">
@@ -82,7 +82,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
                             placeholder="What do you want to talk about?"
                             autoFocus={true}
                         />
-                        <input type="file" ref={imgRef} style={{display: "none"}} onChange={handleImage} />
+                        <input type="file" ref={imgRef} style={{display: "none"}} onChange={handleChangeImage} />
 
                         {area === "image" && shareImg && 
                             <img src={URL.createObjectURL(shareImg)} alt="shared-img" />
