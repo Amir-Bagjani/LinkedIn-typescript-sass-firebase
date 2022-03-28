@@ -6,12 +6,10 @@ import firebase from "firebase/app";
 
 import ReactPlayer from "react-player";
 import Avatar from "./Avatar";
+import Loading from "./Loading";
 
 import "../styles/postModal.scss";
 
-
-import { isSendingArticle } from "../redux/articlesSlice";
-import Loading from "./Loading";
 
 type ModalProps = {
     openModal: boolean;
@@ -20,15 +18,17 @@ type ModalProps = {
 
 const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
 
-    const [shareText,setShareText] = useState("");
     const [shareImg,setShareImg] = useState<File | null>(null);
     const [shareVideo,setShareVideo] = useState("");
     const [area,setArea] = useState("");
     const imgRef = useRef({} as HTMLInputElement);
+    const shareText = useRef({} as HTMLTextAreaElement);
+    const [disableBtn, setDisableBtn] = useState(true);
 
     const { user } = useSelector(UserSelect);
     const { isSendingArticle } = useSelector(ArticlesSelect);
     const { postArticle, error } = usePostArticle();
+
 
     const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShareImg(null);
@@ -59,19 +59,19 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     }
 
     const resetModal = () => {
-        setShareText("");
+        shareText.current.value = "";
         setShareImg(null);
         setShareVideo("");
         closeModal();
     }
 
     const handleSubmit = async() => { 
-        if(shareText !== ""){
+        if(shareText.current.value !== ""){
             const doc = {
                 user: user,
                 image: shareImg,
                 video: shareVideo,
-                description: shareText,
+                description: shareText.current.value,
                 timestamp: firebase.firestore.Timestamp.now(),
             }
             await postArticle(doc);
@@ -79,16 +79,20 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         }
     }
 
+    const isDisable = () => {
+        shareText.current.value ? setDisableBtn(false) : setDisableBtn(true);
+    }  
+
     useEffect(() => {
         if(error) alert(error);
     }, [error])
 
   return (
     <>{openModal && 
-        <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  resetModal()}>
+        <div className="parent-modal"  onClick={e => e.target === e.currentTarget && resetModal()}>
             <div className="modal">
 
-            {isSendingArticle && <Loading />}
+                {isSendingArticle && <Loading />}
 
                 <div className="modal-header">
                     <h2>Create a post</h2>
@@ -103,8 +107,8 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
 
                     <div className="modal-content-editor">
                         <textarea 
-                            value={shareText} 
-                            onChange={e=>setShareText(e.target.value)}
+                            ref={shareText}
+                            onChange={isDisable}
                             placeholder="What do you want to talk about?"
                             autoFocus={true}
                         />
@@ -139,7 +143,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
                             <i className="fas fa-briefcase"></i> Job
                         </button>
                     </div>
-                    <button className="post-btn" onClick={handleSubmit} disabled={!shareText}>Post</button>
+                    <button className="post-btn" onClick={handleSubmit} disabled={disableBtn}>Post</button>
                 </div>            
 
             </div>
