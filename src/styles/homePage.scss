@@ -132,6 +132,7 @@
                     @extend %d-flex;
                     gap: 1rem;
                     padding: 1rem;
+                    border-bottom: 1px solid $bg-light;
 
                     i{
                         position: absolute;
@@ -141,7 +142,7 @@
                 }
 
                 .description{
-                    padding: 0 1rem;
+                    padding: 1rem ;
                 }
 
                 .shared-image{

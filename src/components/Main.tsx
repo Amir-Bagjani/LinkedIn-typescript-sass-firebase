@@ -1,5 +1,7 @@
 import { useState } from "react";
+import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
+import { useGetArticles } from "../hooks/useGetArticles";
 import { ArticlesSelect, UserSelect } from "../redux/store";
 
 import Avatar from "./Avatar";
@@ -12,7 +14,11 @@ const Main = () => {
 
   const [openModal,setOpenModal] = useState(false);
   const { user } = useSelector(UserSelect);
-  const { isSendingArticle } = useSelector(ArticlesSelect);
+  useGetArticles();
+  const { articles, isSendingArticle } = useSelector(ArticlesSelect);
+
+  
+
 
   const closeModal = () => {
     setOpenModal(false);
@@ -40,47 +46,57 @@ const Main = () => {
         </div>
       </div>
 
-      {isSendingArticle && <Loading />}
+      {/* {isSendingArticle && <Loading />} */}
 
-      <div className="article">
+      {articles.length > 0 && articles.map((article, ind) => (
 
-        <div className="actor">
-          <i className="fas fa-ellipsis-h"></i>
-          <Avatar src={user?.photoURL ? user.photoURL : "images/user.svg"} width={45} />
-          <div>
-            <p>title</p>
-            <p>description</p>
-            <p>date</p>
+          <div className="article" key={ind} >
+
+            <div className="actor">
+              <i className="fas fa-ellipsis-h"></i>
+              <Avatar src={article.actor.image ? article.actor.image : "images/user.svg"} width={45} />
+              <div>
+                <p>{article.actor.name}</p>
+                <p>{article.actor.email}</p>
+                <p>{article.actor.date.toDate().toLocaleDateString()}</p>
+              </div>
+            </div>
+
+            <div className="description">
+              {article.description}
+            </div>
+
+            {article.sharedImage && <div className="shared-image">
+              <img loading="lazy" src={article.sharedImage} alt="shared-img" />
+            </div>}
+
+            {article.video && <div className="shared-video">
+              <ReactPlayer width="100" url={article.video} />
+            </div>}
+
+            <div className="social-counts">
+              <div>
+                <img src="images/like-emoji.svg" alt="like-emoji" />
+                <img src="images/clap-emoji.svg" alt="clap-emoji" />
+                <span>0</span>
+              </div>
+              <div>
+                <span>comments: {article.comments}</span>
+              </div>
+            </div>
+
+            <div className="social-actions">
+              {button("fas fa-thumbs-up", "Like")}
+              {button("far fa-comment-dots", "Comments")}
+              {button("fas fa-share", "Shared")}
+              {button("fas fa-paper-plane", "Send")}
+            </div>
+
           </div>
-        </div>
 
-        <div className="description">
-          Description
-        </div>
+      ))}
 
-        <div className="shared-image">
-          <img loading="lazy" src="images/shared-img.jpg" alt="shared-img" />
-        </div>
-
-        <div className="social-counts">
-          <div>
-            <img src="images/like-emoji.svg" alt="like-emoji" />
-            <img src="images/clap-emoji.svg" alt="clap-emoji" />
-            <span>75</span>
-          </div>
-          <div>
-            <span>comments: 75</span>
-          </div>
-        </div>
-
-        <div className="social-actions">
-          {button("fas fa-thumbs-up", "Like")}
-          {button("far fa-comment-dots", "Comments")}
-          {button("fas fa-share", "Shared")}
-          {button("fas fa-paper-plane", "Send")}
-        </div>
-
-      </div>
+      
 
       <PostModal openModal={openModal} closeModal={closeModal}  />
 

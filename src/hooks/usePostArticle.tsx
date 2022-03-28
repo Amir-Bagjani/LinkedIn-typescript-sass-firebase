@@ -51,8 +51,8 @@ export const usePostArticle = () => {
 
         try{
             if(doc.image !== null){
-                const upload =  storage.ref(`images/${doc.image.name}`).put(doc.image);
-                const downloadURL = await upload.snapshot.ref.getDownloadURL();
+                const upload =  await storage.ref(`images/${doc.timestamp.seconds}${doc.image.name}`).put(doc.image);
+                const downloadURL = await upload.ref.getDownloadURL();
                 await  db.collection("articles").add({...data, sharedImage: downloadURL});
             }else if (doc.video){
                 await  db.collection("articles").add({...data, video: doc.video});
@@ -66,14 +66,14 @@ export const usePostArticle = () => {
             }
         }catch(error: any){
             if(!isCancelled) {
-                dispatch(isSendingArticle(false));
+                dispatch(isSendingArticle(false));                
                 setError(error.message);
             }
         }
     }
 
     useEffect(() => {
-        return () => setIsCancelled(true)
+        return () => setIsCancelled(true);
     }, [])
 
 

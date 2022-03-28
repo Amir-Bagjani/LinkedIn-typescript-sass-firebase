@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-import { UserSelect } from "../redux/store";
+import { ArticlesSelect, UserSelect } from "../redux/store";
 import { useSelector } from "react-redux";
+import { usePostArticle } from "../hooks/usePostArticle";
 import firebase from "firebase/app";
 
 import ReactPlayer from "react-player";
 import Avatar from "./Avatar";
 
 import "../styles/postModal.scss";
-import { usePostArticle } from "../hooks/usePostArticle";
+
+
+import { isSendingArticle } from "../redux/articlesSlice";
+import Loading from "./Loading";
 
 type ModalProps = {
     openModal: boolean;
@@ -23,6 +27,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     const imgRef = useRef({} as HTMLInputElement);
 
     const { user } = useSelector(UserSelect);
+    const { isSendingArticle } = useSelector(ArticlesSelect);
     const { postArticle, error } = usePostArticle();
 
     const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +65,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         closeModal();
     }
 
-    const handleSubmit = () => { 
+    const handleSubmit = async() => { 
         if(shareText !== ""){
             const doc = {
                 user: user,
@@ -69,7 +74,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
                 description: shareText,
                 timestamp: firebase.firestore.Timestamp.now(),
             }
-            postArticle(doc)
+            await postArticle(doc);
             resetModal();
         }
     }
@@ -82,6 +87,8 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     <>{openModal && 
         <div className="parent-modal"  onClick={e => e.target === e.currentTarget &&  resetModal()}>
             <div className="modal">
+
+            {isSendingArticle && <Loading />}
 
                 <div className="modal-header">
                     <h2>Create a post</h2>

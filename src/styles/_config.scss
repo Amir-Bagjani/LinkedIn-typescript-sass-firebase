@@ -8,14 +8,6 @@ $max-width: 1128px;
 
 
 //mixins and functions
-@mixin secondary-text($val) {
-    font-size: $val;
-    color: $gray-color;
-}
-@mixin primary-text($val) {
-    font-size: $val;
-    color: $primary-color;
-}
 @mixin btn {
     display: inline-block;
     padding: 0.8rem 1rem;
