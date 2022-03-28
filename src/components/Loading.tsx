@@ -1,17 +1,15 @@
-const sty: React.CSSProperties = {
-    position: `fixed`,
-    zIndex: 999,
-    inset: 0,
-    display: `flex`,
-    alignItems: `center`,
-    justifyContent: `center`,
-}
+import "../styles/loaderComponent.scss"
 const Loading = () => {
-  return (
-      <div style={sty}>
-          <img  src="images/audio.svg" alt="loading" />
+    return (
+      <div className="loading-container">
+          <div className="bouncer">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
       </div>
-  )
-}
-
-export default Loading
+    )
+  }
+  
+  export default Loading

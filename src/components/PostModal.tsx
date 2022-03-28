@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { UserSelect } from "../redux/store";
+import { useSelector } from "react-redux";
+import firebase from "firebase/app";
 
 import ReactPlayer from "react-player";
 import Avatar from "./Avatar";
 
 import "../styles/postModal.scss";
-import { UserSelect } from "../redux/store";
-import { useSelector } from "react-redux";
+import { usePostArticle } from "../hooks/usePostArticle";
 
 type ModalProps = {
     openModal: boolean;
@@ -21,6 +23,7 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     const imgRef = useRef({} as HTMLInputElement);
 
     const { user } = useSelector(UserSelect);
+    const { postArticle, error } = usePostArticle();
 
     const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShareImg(null);
@@ -58,8 +61,22 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
     }
 
     const handleSubmit = () => { 
-        resetModal();
+        if(shareText !== ""){
+            const doc = {
+                user: user,
+                image: shareImg,
+                video: shareVideo,
+                description: shareText,
+                timestamp: firebase.firestore.Timestamp.now(),
+            }
+            postArticle(doc)
+            resetModal();
+        }
     }
+
+    useEffect(() => {
+        if(error) alert(error);
+    }, [error])
 
   return (
     <>{openModal && 

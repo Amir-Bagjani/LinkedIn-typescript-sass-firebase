@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { UserSelect } from "../redux/store";
+import { ArticlesSelect, UserSelect } from "../redux/store";
 
 import Avatar from "./Avatar";
+import Loading from "./Loading";
 import PostModal from "./PostModal";
 
 
@@ -11,6 +12,7 @@ const Main = () => {
 
   const [openModal,setOpenModal] = useState(false);
   const { user } = useSelector(UserSelect);
+  const { isSendingArticle } = useSelector(ArticlesSelect);
 
   const closeModal = () => {
     setOpenModal(false);
@@ -37,6 +39,8 @@ const Main = () => {
           {button("fas fa-align-left", "Write article")}
         </div>
       </div>
+
+      {isSendingArticle && <Loading />}
 
       <div className="article">
 
