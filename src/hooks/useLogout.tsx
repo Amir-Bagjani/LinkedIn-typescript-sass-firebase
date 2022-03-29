@@ -9,22 +9,22 @@ export const useLogout = () => {
     const [error, setError] = useState<string | null>(null);
     const [isCancelled, setIsCancelled] = useState(false);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const logout = async() => {
         setError(null);
         setIsPending(true);
         try{
             await auth.signOut();
-            dispatch(logoutUser())
+            dispatch(logoutUser());
             if (!isCancelled) {
-                setIsPending(false)
-                setError(null)
+                setIsPending(false);
+                setError(null);
             }
         }catch(error: any){
             if (!isCancelled) {
-                setError(error.message)
-                setIsPending(false)
+                setError(error.message);
+                setIsPending(false);
             }
         }
     }

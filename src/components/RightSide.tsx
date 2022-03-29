@@ -1,4 +1,3 @@
-
 const RightSide = () => {
 
   const feedList = () => (

@@ -6,15 +6,15 @@
 }
 
 .header{
-    background-color: #fff;
-    border-bottom: 1px solid lightgray;
     position: fixed;
     z-index: 999;
     left: 0;top: 0;right: 0;
+    background-color: #fff;
+    border-bottom: 1px solid lightgray;
 
     .wrapper{
-        padding: 0.5rem;
         @extend %d-flex;
+        padding: 0.5rem;
 
         .search{
             @extend %d-flex;
@@ -29,8 +29,8 @@
 
         nav{
             background-color: #fff;
+            
             ul{
-                background-color: #fff;
                 @extend %d-flex;
                 gap: 1.5rem;
 
@@ -115,6 +115,7 @@
             position: fixed;
             left: 0;right: 0;bottom: 0;
             z-index: 999;
+            border-top: 1px solid lightgray;
 
             ul{
                 justify-content: space-evenly;
@@ -123,12 +124,11 @@
                 padding-bottom: 0.5rem;
 
                 li.work{
-                    padding-left: 0;
-                    border-left: none;
+                    display: none;
                 }
 
                 li.user p{
-                    top: -60%;
+                    top: -70%;
                 }
             }
         }

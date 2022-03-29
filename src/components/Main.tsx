@@ -1,24 +1,21 @@
 import { useState } from "react";
-import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { ArticlesSelect, UserSelect } from "../redux/store";
+import ReactPlayer from "react-player";
 
 import Avatar from "./Avatar";
-import Loading from "./Loading";
 import PostModal from "./PostModal";
-
 
 
 const Main = () => {
 
   const [openModal,setOpenModal] = useState(false);
   const { user } = useSelector(UserSelect);
-  useGetArticles();
-  const { articles, isSendingArticle } = useSelector(ArticlesSelect);
-
+  const { articles } = useSelector(ArticlesSelect);
   
-
+  //get articles when elements mounts
+  useGetArticles();
 
   const closeModal = () => {
     setOpenModal(false);
@@ -45,8 +42,6 @@ const Main = () => {
           {button("fas fa-align-left", "Write article")}
         </div>
       </div>
-
-      {/* {isSendingArticle && <Loading />} */}
 
       {articles.length > 0 && articles.map((article, ind) => (
 
@@ -95,8 +90,6 @@ const Main = () => {
           </div>
 
       ))}
-
-      
 
       <PostModal openModal={openModal} closeModal={closeModal}  />
 

@@ -1,24 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import firebase from "firebase";
+import { Article } from "../model";
 
-type Article = {
-    actor: {
-        email: string ;
-        name: string;
-        date: firebase.firestore.Timestamp;
-        image: string | null;
-    },
-    video: string;
-    sharedImage: string;
-    comments: number;
-    description: string;
-}
 
 type InitialState = {
     articles: Article[],
     isSendingArticle: boolean
 }
-
 
 const initialState: InitialState = {
     articles: [],

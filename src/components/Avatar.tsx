@@ -1,6 +1,7 @@
 type AvatarProps = { src: string; width: number;};
 
 const Avatar: React.FC<AvatarProps> = ({ src, width }) => {
+
   const style: React.CSSProperties = {
     borderRadius: `50%`,
     width: width,
@@ -12,11 +13,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, width }) => {
 
   return (
     <div>
-      <img
-        src={src}
-        alt="user-avatar"
-        style={style}
-      />
+      <img src={src} alt="user-avatar" style={style} />
     </div>
   );
 };

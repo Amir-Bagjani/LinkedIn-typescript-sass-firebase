@@ -14,6 +14,7 @@ const LeftSide = () => {
         <p>{number}</p>
     </div>
   )
+  
   return (
     <div className="left">
         <img className="img-bg" src="images/card-bg.svg" alt="card-background" />
