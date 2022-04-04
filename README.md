@@ -3,6 +3,9 @@
 
 LinkedIn clone
 
+## [linkedin-typescript.netlify.app](https://linkedin-typescript.netlify.app)
+#
+
 
 ![demo readme](https://user-images.githubusercontent.com/98220299/161558220-e902f2f2-2ce9-4174-96e7-c5d06c340ae5.png)
 
