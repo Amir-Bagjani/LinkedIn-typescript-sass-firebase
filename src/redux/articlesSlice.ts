@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Article } from "../model";
+import { Article } from '../model';
 
 
 type InitialState = {

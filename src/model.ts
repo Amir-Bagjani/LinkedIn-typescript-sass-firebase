@@ -14,7 +14,7 @@ export type Article = {
 }
 
 export type DocType = {
-    user: any;
+    user: firebase.User | null;
     image: File | null;
     video: string;
     description: string;

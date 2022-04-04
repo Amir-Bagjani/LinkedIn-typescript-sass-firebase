@@ -16,10 +16,10 @@ export const usePostArticle = () => {
 
         const data: Article = {
             actor: {
-                email: doc.user.email,
-                name: doc.user.displayName,
+                email: doc?.user?.email !,
+                name: doc?.user?.displayName !,
                 date: doc.timestamp,
-                image: doc.user.photoURL,
+                image: doc?.user?.photoURL !,
             },
             video: "",
             sharedImage: "",

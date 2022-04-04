@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetArticles } from "../hooks/useGetArticles";
 import { ArticlesSelect, UserSelect } from "../redux/store";
 import ReactPlayer from "react-player";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import Avatar from "./Avatar";
 import PostModal from "./PostModal";
@@ -53,7 +54,8 @@ const Main = () => {
               <div>
                 <p>{article.actor.name}</p>
                 <p>{article.actor.email}</p>
-                <p>{article.actor.date.toDate().toLocaleDateString()}</p>
+                {/* <p>{article.actor.date.toDate().toLocaleDateString()}</p> */}
+                <p>{formatDistanceToNow(article.actor.date.toDate(), {addSuffix: true})}</p>
               </div>
             </div>
 
