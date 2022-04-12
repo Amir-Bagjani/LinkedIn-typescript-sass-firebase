@@ -62,6 +62,8 @@ const PostModal: React.FC<ModalProps> = ({openModal, closeModal}) => {
         shareText.current.value = "";
         setShareImg(null);
         setShareVideo("");
+        setDisableBtn(true);
+        setArea("");
         closeModal();
     }
 
